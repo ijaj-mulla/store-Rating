@@ -28,6 +28,7 @@ const corsOptions = {
     : [
         'http://localhost:5173',
         'http://localhost:3000',
+        'https://store-rating-five.vercel.app',
       ],
   credentials: true,
 };
