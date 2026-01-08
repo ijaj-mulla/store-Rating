@@ -1,5 +1,5 @@
-// Simple API client with a direct base URL (no .env)
-const BASE_URL = 'http://localhost:5000/api';
+// API client with direct production backend URL
+const BASE_URL = 'https://store-rating-skny.onrender.com/api';
 
 function getAuthHeaders() {
   const token = localStorage.getItem('token');
