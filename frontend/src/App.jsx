@@ -6,22 +6,18 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/context/AuthContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
-// Auth Pages
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import ChangePasswordPage from "./pages/auth/ChangePasswordPage";
 
-// Admin Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ManageUsersPage from "./pages/admin/ManageUsersPage";
 import AddUserPage from "./pages/admin/AddUserPage";
 import ManageStoresPage from "./pages/admin/ManageStoresPage";
 import AddStorePage from "./pages/admin/AddStorePage";
 
-// User Pages
 import UserDashboard from "./pages/user/UserDashboard";
 
-// Store Owner Pages
 import StoreOwnerDashboard from "./pages/store-owner/StoreOwnerDashboard";
 
 import NotFound from "./pages/NotFound";
@@ -36,12 +32,10 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            {/* Public Routes */}
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
 
-            {/* Protected: Change Password (all roles) */}
             <Route
               path="/change-password"
               element={
@@ -51,7 +45,6 @@ const App = () => (
               }
             />
 
-            {/* Admin Routes */}
             <Route
               path="/admin"
               element={
@@ -93,7 +86,6 @@ const App = () => (
               }
             />
 
-            {/* User Routes (only Dashboard) */}
             <Route
               path="/dashboard"
               element={
@@ -103,7 +95,6 @@ const App = () => (
               }
             />
 
-            {/* Store Owner Routes (only Dashboard) */}
             <Route
               path="/store-owner"
               element={
@@ -113,7 +104,6 @@ const App = () => (
               }
             />
 
-            {/* Catch-all */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

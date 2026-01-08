@@ -1,4 +1,3 @@
-// Allow access only if user's role is in allowed roles
 export const authorize = (...allowed) => {
   return (req, res, next) => {
     if (!req.user) return res.status(401).json({ message: 'Unauthorized' });

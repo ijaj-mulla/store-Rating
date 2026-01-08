@@ -16,7 +16,6 @@ export function ProtectedRoute({ children, allowedRoles }) {
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-    // Redirect to appropriate dashboard based on role
     const roleRedirects = {
       admin: '/admin',
       user: '/dashboard',

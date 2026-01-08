@@ -20,7 +20,6 @@ export default function AdminDashboard() {
           });
         }
       } catch (_err) {
-        // keep fallback mock counts
       }
     })();
     return () => { mounted = false; };

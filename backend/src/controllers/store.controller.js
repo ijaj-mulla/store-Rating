@@ -34,7 +34,6 @@ export const getMyStores = async (req, res) => {
   }
 };
 
-// List all stores for any authenticated user
 export const listAllStores = async (req, res) => {
   try {
     const stores = await listStoresWithOwners();
@@ -45,7 +44,6 @@ export const listAllStores = async (req, res) => {
   }
 };
 
-// List all stores with user's own rating (for users)
 export const listStoresForUser = async (req, res) => {
   try {
     const stores = await listStoresWithUserRating(req.user.id);
@@ -56,20 +54,17 @@ export const listStoresForUser = async (req, res) => {
   }
 };
 
-// Get store details with ratings list for store owner
 export const getStoreWithRatings = async (req, res) => {
   try {
     const { storeId } = req.params;
     const userId = req.user.id;
     
-    // Check if the store belongs to the authenticated store owner
     const store = await getStoreWithRatingsForOwner(userId, storeId);
     
     if (!store) {
       return res.status(404).json({ message: 'Store not found or you do not own this store' });
     }
     
-    // Get detailed ratings with user names
     const ratings = await getRatingsWithUserNamesForStore(storeId);
     
     return res.json({

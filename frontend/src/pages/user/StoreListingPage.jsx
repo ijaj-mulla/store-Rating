@@ -27,7 +27,6 @@ export default function StoreListingPage() {
     listAllStores()
       .then(async (list) => {
         if (!mounted) return;
-        // Fetch rating stats for each store
         const stats = await Promise.all(
           list.map(async (s) => {
             try {
@@ -49,7 +48,6 @@ export default function StoreListingPage() {
           ...statsMap[s.id],
         }));
         setRows(mapped);
-        // Fetch user ratings for each store to populate UI
         if (user?.id && mapped.length) {
           Promise.all(
             mapped.map(async (s) => {
@@ -71,7 +69,6 @@ export default function StoreListingPage() {
         }
       })
       .catch((err) => {
-        // optional: surface error
       });
     return () => { mounted = false; };
   }, [user?.id]);
@@ -98,12 +95,9 @@ export default function StoreListingPage() {
     setIsSubmitting(true);
     try {
       await submitRating(selectedStore.id, ratingValue);
-      // Update local rating map to reflect change immediately
       setUserRatingsMap(prev => ({ ...prev, [selectedStore.id]: ratingValue }));
-      // Refetch store rating stats to update average/count
       const { count, average } = await getStoreRatingStats(selectedStore.id);
       setRows(prev => prev.map(s => s.id === selectedStore.id ? { ...s, totalRatings: count, averageRating: average } : s));
-      // Notify admin store list to refresh
       window.dispatchEvent(new CustomEvent('rating:submitted', { detail: { storeId: selectedStore.id } }));
       toast({ description: 'Rating submitted successfully' });
       setSelectedStore(null);

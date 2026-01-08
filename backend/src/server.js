@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 5000;
 (async () => {
   try {
     await initDb();
-    // Seed demo users when explicitly enabled or in development by default
     const shouldSeed = process.env.DEMO_SEED
       ? process.env.DEMO_SEED === 'true'
       : (process.env.NODE_ENV !== 'production');
@@ -21,7 +20,6 @@ const PORT = process.env.PORT || 5000;
       console.log(`Server running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
     });
 
-    // Graceful shutdown
     const shutdown = async () => {
       console.log('Shutting down...');
       server.close(async () => {

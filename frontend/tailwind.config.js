@@ -1,6 +1,3 @@
-/*****************
- Tailwind CSS Config (JS)
-*****************/
 module.exports = {
   darkMode: ["class"],
   content: [

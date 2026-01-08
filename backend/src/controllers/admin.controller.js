@@ -35,7 +35,6 @@ export const getStores = async (req, res) => {
   }
 };
 
-// Admin: create a new user with role
 export const adminCreateUser = async (req, res) => {
   try {
     const { name, email, password, role, address } = req.body;
@@ -56,7 +55,6 @@ export const adminCreateUser = async (req, res) => {
   }
 };
 
-// Admin: create store and assign to an existing owner by email or id
 export const adminCreateStore = async (req, res) => {
   try {
     const { name, ownerEmail, ownerId, rating, address } = req.body;

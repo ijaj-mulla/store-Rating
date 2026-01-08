@@ -18,7 +18,6 @@ export default function ManageUsersPage() {
     adminListUsers()
       .then((list) => {
         if (!mounted) return;
-        // Map backend fields to UI shape
         const mapped = list.map((u) => ({
           id: u.id,
           name: u.name,
@@ -40,7 +39,6 @@ export default function ManageUsersPage() {
     return true;
   });
 
-  // Sorting
   const [sortKey, setSortKey] = useState('name');
   const [sortDir, setSortDir] = useState('asc');
 
@@ -81,7 +79,6 @@ export default function ManageUsersPage() {
         </button>
       </div>
 
-      {/* Filters */}
       <div style={{ marginBottom: '15px', display: 'flex', gap: '10px' }}>
         <input
           placeholder="Filter by name"
@@ -107,7 +104,6 @@ export default function ManageUsersPage() {
         </select>
       </div>
 
-      {/* Table */}
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr style={{ background: '#f5f5f5' }}>
@@ -148,7 +144,6 @@ export default function ManageUsersPage() {
         </tbody>
       </table>
 
-      {/* Inline User Details */}
       {selectedUser && (
         <div style={{ marginTop: '20px', padding: '15px', border: '1px solid #ddd', background: '#fafafa' }}>
           <h3 style={{ marginBottom: '10px' }}>User Details</h3>

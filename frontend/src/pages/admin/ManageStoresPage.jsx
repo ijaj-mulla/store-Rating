@@ -44,7 +44,6 @@ export default function ManageStoresPage() {
     return true;
   });
 
-  // Sorting
   const [sortKey, setSortKey] = useState('name');
   const [sortDir, setSortDir] = useState('asc');
 

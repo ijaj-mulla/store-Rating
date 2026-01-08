@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-// Verify JWT and attach user to request
 export const authenticate = (req, res, next) => {
   try {
     const authHeader = req.headers['authorization'] || '';

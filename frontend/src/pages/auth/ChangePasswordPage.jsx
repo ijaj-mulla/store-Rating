@@ -16,7 +16,6 @@ export default function ChangePasswordPage() {
     confirmPassword: '',
   });
 
-  // Redirect to login if not authenticated
   React.useEffect(() => {
     if (!user) {
       navigate('/login');

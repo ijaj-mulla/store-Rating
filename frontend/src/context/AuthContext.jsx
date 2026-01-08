@@ -3,7 +3,6 @@ import { loginApi, signupApi, changePasswordApi } from '@/lib/api';
 
 const AuthContext = createContext(undefined);
 
-// Mock users for demo
 const mockUsers = [];
 
 export function AuthProvider({ children }) {
@@ -14,7 +13,6 @@ export function AuthProvider({ children }) {
   });
 
   useEffect(() => {
-    // Check for existing session
     const storedUser = localStorage.getItem('currentUser');
     const token = localStorage.getItem('token');
     if (storedUser && token) {
@@ -74,17 +72,12 @@ export function AuthProvider({ children }) {
       const result = await changePasswordApi(currentPassword, newPassword);
       
       if (result.message) {
-        // Success - return success status
         return { success: true };
       } else {
-        // Handle specific error cases
         if (result.error?.includes('Not authenticated') || result.error?.includes('Invalid or expired token')) {
-          // Token expired or invalid - redirect to login
           localStorage.removeItem('currentUser');
           localStorage.removeItem('token');
           setAuthState({ user: null, isAuthenticated: false, isLoading: false });
-          // You might want to redirect to login page
-          // window.location.href = '/login';
           return { success: false, error: 'Session expired. Please login again.' };
         }
         

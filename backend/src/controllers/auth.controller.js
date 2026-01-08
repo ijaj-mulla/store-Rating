@@ -5,7 +5,6 @@ import { emailExists, createUser, getByEmail, updateUserPassword } from '../mode
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1d';
 
 const signToken = (user) => {
-  // Keep payload minimal
   return jwt.sign(
     { id: user.id, role: user.role, email: user.email, name: user.name },
     process.env.JWT_SECRET,
@@ -25,7 +24,6 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: 'Invalid role' });
     }
 
-    // Check if email exists
     const exists = await emailExists(email);
     if (exists) {
       return res.status(409).json({ message: 'Email already registered' });
@@ -71,27 +69,22 @@ export const changePassword = async (req, res) => {
       return res.status(400).json({ message: 'Current password and new password are required' });
     }
 
-    // Get user from token (middleware should attach user to req)
     if (!req.user) {
       return res.status(401).json({ message: 'Not authenticated' });
     }
 
-    // Get current user data with password
     const userWithPassword = await getByEmail(req.user.email);
     if (!userWithPassword) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Verify current password
     const currentPasswordMatch = await bcrypt.compare(currentPassword, userWithPassword.password);
     if (!currentPasswordMatch) {
       return res.status(401).json({ message: 'Current password is incorrect' });
     }
 
-    // Hash new password
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
-    // Update password in database
     const updated = await updateUserPassword(req.user.email, hashedNewPassword);
     if (!updated) {
       return res.status(500).json({ message: 'Failed to update password' });

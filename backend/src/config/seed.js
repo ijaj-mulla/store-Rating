@@ -2,8 +2,6 @@ import bcrypt from 'bcrypt';
 import { emailExists, createUser, getByEmail } from '../models/users.model.js';
 import { query } from './db.js';
 
-// Create demo users if they don't exist and optionally reset passwords for existing demo users.
-// Intended for development only unless DEMO_SEED/DEMO_RESET explicitly set.
 export const seedDemo = async () => {
   const demoUsers = [
     { name: 'Admin', email: 'admin@store.com', password: 'Admin@123', role: 'admin' },

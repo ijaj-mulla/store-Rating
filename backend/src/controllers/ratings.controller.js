@@ -46,7 +46,6 @@ export const getStoreRatingsWithUserNames = async (req, res) => {
     const { storeId } = req.params;
     const userId = req.user.id;
     
-    // Check if the store belongs to the authenticated store owner
     const ownerStores = await getByOwner(userId);
     const ownsStore = ownerStores.some(store => store.id === parseInt(storeId));
     

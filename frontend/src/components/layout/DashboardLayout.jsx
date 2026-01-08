@@ -32,7 +32,6 @@ export function DashboardLayout({ children }) {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
-      {/* Sidebar */}
       <div style={{ width: '180px', borderRight: '1px solid #ddd', padding: '16px', background: '#fafafa' }}>
         <div style={{ fontWeight: 'bold', marginBottom: '20px' }}>StoreRate</div>
         

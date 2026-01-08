@@ -5,12 +5,9 @@ import { submitRating, getUserRating, getStoreRatingStats, getStoreRatingsWithUs
 
 const router = Router();
 
-// Only users can submit/update ratings
 router.post('/', authenticate, authorize('user'), submitRating);
 router.get('/my/:storeId', authenticate, authorize('user'), getUserRating);
-// Public endpoint for store rating stats
 router.get('/store/:storeId/stats', getStoreRatingStats);
-// Only store owners can view ratings for their stores
 router.get('/store/:storeId/ratings', authenticate, authorize('store_owner'), getStoreRatingsWithUserNames);
 
 export default router;

@@ -9,7 +9,6 @@ export default function StoreOwnerDashboard() {
   const [myStore, setMyStore] = useState(null);
   const [storeRatings, setStoreRatings] = useState([]);
   
-  // Fixed: setError is not defined issue resolved - v2.0
   console.log('StoreOwnerDashboard component loaded at:', new Date().toISOString());
 
   const refetch = () => {
@@ -22,11 +21,10 @@ export default function StoreOwnerDashboard() {
         if (store) {
           return getStoreRatingsWithUserNames(store.id);
         }
-        return { ratings: [] }; // Return object with empty ratings array
+        return { ratings: [] };
       })
       .then((response) => {
         if (!mounted) return;
-        // Handle both old format (array) and new format (object with ratings)
         const ratings = Array.isArray(response) ? response : (response.ratings || []);
         setStoreRatings(ratings);
       })
@@ -48,7 +46,6 @@ export default function StoreOwnerDashboard() {
     };
   }, [user?.id]);
 
-  // Sorting: by userName (text) or rating (number)
   const [sortKey, setSortKey] = useState('userName');
   const [sortDir, setSortDir] = useState('asc');
 
