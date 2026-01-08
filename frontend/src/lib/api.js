@@ -1,5 +1,7 @@
 // API client with direct production backend URL
-const BASE_URL = 'https://store-rating-skny.onrender.com/api';
+const API_BASE_URL = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+  ? 'http://localhost:5000'
+  : 'https://store-rating-skny.onrender.com/api';
 
 function getAuthHeaders() {
   const token = localStorage.getItem('token');
@@ -9,7 +11,7 @@ function getAuthHeaders() {
 }
 
 export async function apiPost(path, body) {
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const res = await fetch(`${API_BASE_URL}${path}`, {
     method: 'POST',
     headers: getAuthHeaders(),
     body: JSON.stringify(body),
@@ -20,7 +22,7 @@ export async function apiPost(path, body) {
 }
 
 export async function apiGet(path) {
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const res = await fetch(`${API_BASE_URL}${path}`, {
     headers: getAuthHeaders(),
   });
   const data = await res.json().catch(() => ({}));
